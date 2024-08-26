@@ -1,0 +1,49 @@
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../build"
+  },
+  "package": {
+    "productName": "win",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      },
+      "dialog": {
+        "all": true
+      }
+    },
+    "windows": [
+      {
+        "title": "Welcome to Win!",
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "minWidth": 300,
+        "minHeight": 150
+      }
+    ],
+    "security": {
+      "csp": null
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all", 
+      "identifier": "com.win.app",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    }
+  }
+}
