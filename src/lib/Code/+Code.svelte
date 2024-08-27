@@ -16,10 +16,10 @@
     async function updateContent(path: string) {
         if (path) {
             try {
-                const fileType = await invoke("get_file_type", { filePath: path });
+                const fileType = await invoke("get_file_type", { filePath: path })
 
-                if (fileType === 'text') {
-                    editorContent = await invoke("get_file_content", { filePath: path });
+                if (fileType === 'text' || fileType == 'unknown') {
+                    editorContent = await invoke("get_file_content", { filePath: path })
                     value = editorContent
                     setLanguageMode(path)
                     isImage = false

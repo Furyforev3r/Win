@@ -22,6 +22,26 @@ export function addEditor(filePath: string, name: string) {
     })
 }
 
+export function switchTab(forward: boolean = true) {
+    const editors = get(editorsOpen)
+    const currentPath = get(editorOpenPath)
+
+    if (editors.length <= 1) return
+    const currentIndex = editors.findIndex(editor => editor.filePath === currentPath)
+
+    if (currentIndex === -1) return
+
+    let newIndex = forward
+        ? (currentIndex + 1) % editors.length
+        : (currentIndex - 1 + editors.length) % editors.length
+
+    const newEditor = editors[newIndex]
+
+    if (newEditor && newEditor.filePath) {
+        setEditorOpenPath(newEditor.filePath)
+    }
+}
+
 export function removeEditor(name: string) {
     let name_split: any = name.split('\\').pop()
 

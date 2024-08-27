@@ -3,25 +3,14 @@
     import Code from "../lib/Code/+Code.svelte"
     import Tablist from "$lib/TabList/+Tablist.svelte"
     import { projectPath, editorOpenPath } from "../services/services"
-    import { onDestroy } from 'svelte'
-
-    let currentEditorOpenPath: string | undefined
-
-    const unsubscribe = editorOpenPath.subscribe(value => {
-        currentEditorOpenPath = value
-    })
-
-    onDestroy(() => {
-        unsubscribe()
-    })
 </script>
 
 <div class="container">
     <Explorer projectPath={projectPath} />
     <div>
         <Tablist />
-        {#if currentEditorOpenPath}
-            <Code editorPath={currentEditorOpenPath}/>
+        {#if $editorOpenPath}
+            <Code editorPath={$editorOpenPath}/>
         {/if}
     </div>
 </div>

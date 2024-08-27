@@ -7,7 +7,6 @@
     let showChildren = false
     let projectOpen: boolean = false
 
-
     function toggleChildren() {
         showChildren = !showChildren
     }

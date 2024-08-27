@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte'
-    import { setEditorOpenPath, removeEditor } from '../../services/services'
-    import { onMount } from 'svelte';
+    import { setEditorOpenPath, removeEditor, switchTab } from '../../services/services'
+    import { onMount } from 'svelte'
 
     export let fileName: string
     export let editorFile: any

@@ -1,6 +1,25 @@
 <script lang="ts">
     import Tab from "./+Tab.svelte"
-    import { editorsOpen, editorOpenPath } from "../../services/services"
+    import { editorsOpen, editorOpenPath, switchTab } from "../../services/services"
+    import { onMount } from "svelte"
+
+    async function handleKeydown(event: any) {
+        if (event.ctrlKey && event.key === "Tab") {
+            event.preventDefault()
+            switchTab()
+        } else if (event.ctrlKey && event.shiftKey && event.key === "Tab") {
+            event.preventDefault()
+            switchTab(false)
+        }
+    }
+    
+    onMount(() => {
+        window.addEventListener('keydown', handleKeydown)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeydown)
+        }
+    })
 </script>
 
 <div class="tablist">
