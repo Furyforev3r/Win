@@ -26,8 +26,8 @@
         "width": 800,
         "height": 600,
         "resizable": true,
-        "minWidth": 300,
-        "minHeight": 150
+        "minWidth": 600,
+        "minHeight": 300
       }
     ],
     "security": {

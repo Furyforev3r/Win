@@ -54,6 +54,7 @@
             {/if}
         {:else}
             <div class="selectProject">
+                <p class="selectDescription">You have not yet opened a folder.</p>
                 <button class="projectButton" on:click={handleButtonClick}>Choose a project</button>
             </div>
         {/if}
@@ -64,7 +65,7 @@
 <style>
     .explorer {
         position: fixed;
-        min-height: 100dvh;
+        height: 100dvh;
         width: 256px;
         background: var(--activityBar-background);
     }
@@ -104,9 +105,17 @@
         place-items: center;
     }
 
+    .selectDescription {
+        max-width: 50%;
+        color: rgba(187, 187, 187, 0.6);
+        margin: 0.8rem;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
     .projectButton {
         padding: 0.8rem 1.3rem;
-        background: var(--button-background);
+        background: var(--editorRuler-foreground);
         border: none;
         cursor: pointer;
         transition: background 0.3s;
