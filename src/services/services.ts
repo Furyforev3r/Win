@@ -59,6 +59,7 @@ export function removeEditor(name: string) {
 
     if (get(editorsOpen).length <= 1) {
         setEditorOpenPath('')
+        appWindow.setTitle(`Win`)
     }
 }
 
