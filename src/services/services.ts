@@ -1,4 +1,5 @@
 import { writable, get } from 'svelte/store'
+import { iconMap } from './icons'
 
 export const projectPath = ''
 export const editorOpenPath = writable('')
@@ -54,5 +55,19 @@ export function removeEditor(name: string) {
 
     if (get(editorsOpen).length <= 1) {
         setEditorOpenPath('')
+    }
+}
+
+type File = {
+    name: string;
+    is_dir?: boolean;
+}
+
+export function getIcon(file: File): string {
+    if (file.is_dir) {
+        return iconMap[file.name] ?? iconMap['folder'];
+    } else {
+        const fileExtension = file.name.split('.').pop();
+        return fileExtension ? iconMap[`.${fileExtension}`] ?? iconMap['.txt'] : iconMap['.txt'];
     }
 }

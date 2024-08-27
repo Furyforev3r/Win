@@ -1,11 +1,12 @@
 <script lang="ts">
     import Icon from "@iconify/svelte"
-    import { setEditorOpenPath } from "../../services/services"
+    import { setEditorOpenPath, getIcon } from "../../services/services"
 
     export let file: any
     
     let showChildren = false
     let projectOpen: boolean = false
+    let iconPath: any
 
     function toggleChildren() {
         showChildren = !showChildren
@@ -14,6 +15,8 @@
     function toggleProject() {
         projectOpen = !projectOpen
     }
+    
+    $: iconPath = getIcon(file)
 </script>
 
 <div class="fileItem">
@@ -25,7 +28,7 @@
                 </div>
             {/if}
     
-            <Icon icon={file.is_dir ? "material-symbols:folder-outline" : "mdi:file"} />
+            <img class="fileIcon" src={iconPath} alt={file.name} width="15px" >
         </div>
 
         <p>
@@ -64,6 +67,7 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
     }
     
     .projectArrow {

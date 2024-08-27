@@ -1,11 +1,13 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte'
-    import { setEditorOpenPath, removeEditor, switchTab } from '../../services/services'
+    import { setEditorOpenPath, removeEditor, getIcon } from '../../services/services'
     import { onMount } from 'svelte'
 
     export let fileName: string
     export let editorFile: any
     export let filePath: string
+
+    let iconPath: any
     
     async function handleKeydown(event: any) {
         if (event.ctrlKey && event.key === 'w' && filePath === editorFile) {
@@ -21,10 +23,12 @@
             window.removeEventListener('keydown', handleKeydown)
         }
     })
+    
+    $: iconPath = getIcon({ name: fileName, is_dir: false })
 </script>
 
 <button class="tab" class:tabSelected={filePath === editorFile} on:click={() => setEditorOpenPath(filePath)}>
-    <Icon icon="mdi:file-outline" />
+    <img src={iconPath} alt={fileName} width="15px" />
     <div class="fileInfo">
         <p>{fileName}</p>
         <button class="closeButton" on:click={() => removeEditor(filePath)}>
