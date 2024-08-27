@@ -5,5 +5,6 @@
 
 **Win** is a modern and lightweight code editor developed with **Tauri**, **SvelteKit**, and **Rust**. It is designed to provide an efficient and customizable coding experience, leveraging the performance and security of these technologies.
 
-# Demo
-![Screenshot](https://github.com/user-attachments/assets/d69d03ba-7757-4a5e-a058-6f6d23c25497)
+# Demos
+![Screenshot](https://github.com/user-attachments/assets/0753574f-c9ba-462f-93ad-17dd7bb87fdd)
+![Screenshot](https://github.com/user-attachments/assets/3a770b06-1376-40ea-8885-b1fa71aee512)
