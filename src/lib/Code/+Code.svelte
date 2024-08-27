@@ -55,9 +55,6 @@
     .notSave {
         border-left: 1px solid var(--customMarkdownLinks-foreground);
     }
-    .editor {
-        max-height: calc(100% - 3rem);
-    }
 
     .editor::-webkit-scrollbar {
         width: 10px;

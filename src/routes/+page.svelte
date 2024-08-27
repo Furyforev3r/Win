@@ -27,9 +27,7 @@
 </div>
 
 <style>
-    .container {
-        height: 100%;
-        display: flex;
-        flex-direction: row;
+    .container div {
+        margin-left: 256px;
     }
 </style>

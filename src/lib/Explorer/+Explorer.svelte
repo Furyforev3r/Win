@@ -63,6 +63,7 @@
 
 <style>
     .explorer {
+        position: fixed;
         min-height: 100dvh;
         width: 256px;
         background: var(--activityBar-background);
