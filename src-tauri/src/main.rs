@@ -5,6 +5,8 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use serde::Serialize;
 use tauri::command;
+use mime_guess::from_path;
+use base64::{Engine, engine::general_purpose};
 
 #[derive(Serialize)]
 struct FileEntry {
@@ -99,6 +101,26 @@ fn save_file_content(file_path: String, content: String) -> Result<(), String> {
     }
 }
 
+#[command]
+fn get_file_type(file_path: String) -> String {
+    let mime_type = from_path(&file_path).first_or_octet_stream();
+    if mime_type.type_() == mime::TEXT {
+        return "text".to_string();
+    } else if mime_type.type_() == mime::IMAGE {
+        return "image".to_string();
+    }
+    "unknown".to_string()
+}
+
+#[command]
+fn get_file_base64(file_path: String) -> Result<String, String> {
+    let engine = general_purpose::STANDARD;
+    
+    match fs::read(&file_path) {
+        Ok(file_data) => Ok(engine.encode(&file_data)),
+        Err(e) => Err(format!("Failed to read file: {}", e)),
+    }
+}
 
 #[command]
 fn greet(name: &str) -> String {
@@ -111,7 +133,9 @@ fn main() {
             greet, 
             get_files_in_folder, 
             get_file_content, 
-            save_file_content
+            save_file_content,
+            get_file_type,
+            get_file_base64
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
