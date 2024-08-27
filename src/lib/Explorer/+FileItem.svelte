@@ -63,6 +63,10 @@
         border: none;
     }
 
+    .fileItemContent p {
+        color: rgba(187, 187, 187, 0.6);
+    }
+
     .fileIcons {
         display: flex;
         flex-direction: row;

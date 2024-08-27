@@ -59,15 +59,15 @@ export function removeEditor(name: string) {
 }
 
 type File = {
-    name: string;
-    is_dir?: boolean;
+    name: string
+    is_dir?: boolean
 }
 
 export function getIcon(file: File): string {
     if (file.is_dir) {
-        return iconMap[file.name] ?? iconMap['folder'];
+        return iconMap[`folder-${file.name}`] ?? iconMap['folder']
     } else {
         const fileExtension = file.name.split('.').pop();
-        return fileExtension ? iconMap[`.${fileExtension}`] ?? iconMap['.txt'] : iconMap['.txt'];
+        return fileExtension ? iconMap[`.${fileExtension}`] ?? iconMap['.txt'] : iconMap['.txt']
     }
 }
