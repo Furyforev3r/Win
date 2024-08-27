@@ -1,15 +1,19 @@
 import { writable, get } from 'svelte/store'
 import { iconMap } from './icons'
+import { appWindow } from '@tauri-apps/api/window'
 
 export const projectPath = ''
 export const editorOpenPath = writable('')
 export const editorsOpen = writable<Array<{ name: string, filePath: string }>>([])
 
 export function setEditorOpenPath(path: string) {
-    editorOpenPath.set(path)
+    let fileName = path.split('\\').pop()
 
-    if (!get(editorsOpen).includes({ filePath: path, name: path.split('\\').pop() || '' })) {
-        addEditor(path, path.split('\\').pop() || '')
+    editorOpenPath.set(path)
+    appWindow.setTitle(`Win - ${fileName}`)
+
+    if (!get(editorsOpen).includes({ filePath: path, name: fileName || '' })) {
+        addEditor(path, fileName || '')
     }
 }
 

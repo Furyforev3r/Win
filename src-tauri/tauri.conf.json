@@ -18,6 +18,9 @@
       },
       "dialog": {
         "all": true
+      },
+      "window": {
+        "setTitle": true
       }
     },
     "windows": [
