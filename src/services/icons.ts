@@ -65,7 +65,7 @@ export const iconMap: any = {
     '.mdx': '/icons/files/mdx.svg',
     '.mcfunction': '/icons/files/minecraft.svg',
     '.mcpack': '/icons/files/minecraft.svg',
-    '.toml': '/icons/files/netlify.svg',
+    '.toml': '/icons/files/gear.svg',
     '.nix': '/icons/files/nix.svg',
     '.ipynb': '/icons/files/notebook.svg',
     '.njk': '/icons/files/nunjucks.svg',
