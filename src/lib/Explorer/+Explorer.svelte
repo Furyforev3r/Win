@@ -3,11 +3,10 @@
     import { invoke } from "@tauri-apps/api/tauri"
     import Icon from '@iconify/svelte'
     import FileItem from "./+FileItem.svelte"
-    import { closeProject, projectPath } from "../../services/services"
 
+    export let projectPath: any
     let projectOpen: boolean = false
     let files: Array<{ name: string, is_dir: boolean, children?: Array<{ name: string, is_dir: boolean }> }> = []
-    let projectButtons: boolean = false
 
     async function handleButtonClick() {
         const selectedPath = await open({
@@ -17,8 +16,8 @@
         })
 
         if (selectedPath) {
-            projectPath.set(selectedPath as string)
-            await loadFiles($projectPath)
+            projectPath = selectedPath as string
+            await loadFiles(projectPath)
         }
     }
 
@@ -34,36 +33,17 @@
     function toggleProject() {
         projectOpen = !projectOpen
     }
-
-    function toggleButtons() {
-        projectButtons = !projectButtons
-    }
-
-    function close() {
-        toggleProject()
-        toggleButtons()
-        closeProject()
-    }
 </script>
 
 <div class="explorer">
     <p class="explorerTitle">Explorer</p>
     <div class="explorerProject">
-        {#if $projectPath}
-            <button class="projectTitle" on:click={toggleProject} on:pointerenter={toggleButtons} on:pointerleave={toggleButtons}>
-                <div class="projectInfo">
-                    <div class="projectArrow" class:projectClosed={!projectOpen}>
-                        <Icon icon="ri:arrow-down-s-line" />
-                    </div>
-                    <p>{$projectPath}</p>
+        {#if projectPath}
+            <button class="projectTitle" on:click={toggleProject}>
+                <div class="projectArrow" class:projectClosed={!projectOpen}>
+                    <Icon icon="ri:arrow-down-s-line" />
                 </div>
-                {#if projectButtons}
-                    <div class="projectButtons">
-                        <button class="titleButton" on:click={close}>
-                            <Icon icon="ri:close-fill" />
-                        </button>
-                    </div>
-                {/if}
+                <p>{projectPath}</p>
             </button>
             {#if projectOpen}
                 <div class="filesList">
@@ -94,30 +74,6 @@
         padding: 1rem;
     }
 
-    .projectInfo, .projectButtons {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.3rem;
-    }
-
-    .titleButton {
-        cursor: pointer;
-        margin-inline: 0.3rem;
-        display: grid;
-        place-items: center;
-        padding: 1px;
-        border: none;
-        border-radius: 2px;
-        outline: none;
-        background: none;
-        transition: background 0.3s;
-    }
-
-    .titleButton:hover {
-        background-color: var(--tokenErrorToken-foreground);
-    }
-
     .projectTitle {
         width: 100%;
         border: none;
@@ -125,7 +81,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        gap: 0.3rem;
         padding: 0.3rem;
         background: var(--editorIndentGuide-background);
         font-size: 12px;
