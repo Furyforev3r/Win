@@ -47,11 +47,10 @@ export function switchTab(forward: boolean = true) {
     }
 }
 
-export function removeEditor(name: string) {
-    let name_split: any = name.split('\\').pop()
+export function removeEditor(path: string) {
 
     editorsOpen.update(editors => {
-        let editor_filter = editors.filter(editor => editor.name != name_split)
+        let editor_filter = editors.filter(editor => editor.filePath != path)
         
         setEditorOpenPath(editor_filter.at(-1)?.filePath || editor_filter.at(0)?.filePath || '')
         return editor_filter
