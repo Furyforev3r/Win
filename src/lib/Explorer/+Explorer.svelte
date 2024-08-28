@@ -1,9 +1,8 @@
 <script lang="ts">
     import { open } from "@tauri-apps/api/dialog"
-    import { invoke } from "@tauri-apps/api/tauri"
     import Icon from '@iconify/svelte'
     import FileItem from "./+FileItem.svelte"
-    import { closeProject, projectPath } from "../../services/services"
+    import { closeProject, getFilesInFolder, projectPath } from "../../services/services"
 
     let projectOpen: boolean = false
     let files: Array<{ name: string, is_dir: boolean, children?: Array<{ name: string, is_dir: boolean }> }> = []
@@ -24,7 +23,7 @@
 
     async function loadFiles(path: string) {
         try {
-            const fileEntries = await invoke("get_files_in_folder", { folderPath: path })
+            const fileEntries = await getFilesInFolder(path)
             files = fileEntries as Array<{ name: string, is_dir: boolean, children?: Array<{ name: string, is_dir: boolean }> }>
         } catch (error) {
             console.error("Failed to load files:", error)

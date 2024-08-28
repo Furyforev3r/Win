@@ -1,11 +1,11 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { invoke } from "@tauri-apps/api/tauri"
     import CodeMirror from "svelte-codemirror-editor"
     import minTheme from "./themes"
     import minStyles from "./styles"
-    import toast, { Toaster } from 'svelte-french-toast'
+    import toast from 'svelte-french-toast'
     import { languageStore, setLanguageMode } from './languages'
+    import { getFileType, getFileContent, getFileBase64, saveFileContent } from '../../services/services'
 
     export let editorPath: string = ''
     let editorContent: string = ''
@@ -13,19 +13,20 @@
     let isImage: boolean = false
     let imageSrc: string = ''
 
+
     async function updateContent(path: string) {
         if (path) {
             try {
-                const fileType = await invoke("get_file_type", { filePath: path })
+                const fileType = await getFileType(path)
 
                 if (fileType === 'text' || fileType == 'unknown') {
-                    editorContent = await invoke("get_file_content", { filePath: path })
+                    editorContent = await getFileContent(path)
                     value = editorContent
                     setLanguageMode(path)
                     isImage = false
                 } else if (fileType === 'image') {
                     isImage = true
-                    imageSrc = `data:image/png;base64,${await invoke("get_file_base64", { filePath: path })}`
+                    imageSrc = `data:image/png;base64,${await getFileBase64(path)}`
                 } else {
                     toast.error(`Unsupported file type: ${fileType}`, {
                         position: "bottom-right",
@@ -41,12 +42,6 @@
         }
     }
 
-    $: {
-        if (editorPath) {
-            updateContent(editorPath)
-        }
-    }
-
     async function handleKeydown(event: any) {
         if (event.ctrlKey && event.key === 's') {
             event.preventDefault()
@@ -55,7 +50,7 @@
                     position: "bottom-right",
                     style: "background: #1f1f1f; color: #CCC; filter: drop-shadow(3px 3px 8px #000);"
                 })
-                await invoke("save_file_content", { filePath: editorPath, content: value }).then(() => editorContent = value)
+                await saveFileContent(editorPath, value).then(() => editorContent = value)
             }
         }
     }
@@ -67,10 +62,15 @@
             window.removeEventListener('keydown', handleKeydown)
         }
     })
+
+    $: {
+        if (editorPath) {
+            updateContent(editorPath)
+        }
+    }
 </script>
 
 <div class="editor" class:notSave={editorContent != value}>
-    <Toaster />
     {#if isImage}
         <div class="imagePreviewContainer">
             <img src={imageSrc} alt="Preview" class="image-preview" />

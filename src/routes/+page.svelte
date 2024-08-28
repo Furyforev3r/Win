@@ -2,10 +2,34 @@
     import Explorer from "$lib/Explorer/+Explorer.svelte"
     import Code from "$lib/Code/+Code.svelte"
     import Tablist from "$lib/TabList/+Tablist.svelte"
-    import { projectPath, editorOpenPath } from "../services/services"
+    import { editorOpenPath } from "../services/services"
+    import Palette from "$lib/Palette/Palette.svelte"
+    import { Toaster } from "svelte-french-toast"
+    import { onMount } from "svelte"
+    
+    let showPalette: boolean = false
+
+    async function handleKeydown(event: any) {
+        if (event.ctrlKey && event.shiftKey && event.key === 'O' ) {
+            event.preventDefault()
+            showPalette = !showPalette
+        }
+    }
+    
+    onMount(() => {
+        window.addEventListener('keydown', handleKeydown)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeydown)
+        }
+    })
 </script>
 
 <div class="container">
+    <Toaster />
+    {#if showPalette}
+        <Palette />
+    {/if}
     <Explorer />
     <div class:codeMargin={$editorOpenPath}>
         <Tablist />
@@ -18,7 +42,7 @@
                         <p>Win is a modern and lightweight code editor.</p>
                     </div>
                     <div class="shortcutsExample">
-                        <p>Show all comands <span>Ctrl</span> + <span>Shift</span> + <span>P</span></p>
+                        <p>Show all comands <span>Ctrl</span> + <span>Shift</span> + <span>O</span></p>
                         <p>Save current file <span>Ctrl</span> + <span>S</span></p>
                         <p>Change tabs <span>Ctrl</span> + <span>Tab</span></p>
                         <p>Close tab <span>Ctrl</span> + <span>W</span></p>

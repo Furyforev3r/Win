@@ -1,6 +1,7 @@
 import { writable, get } from 'svelte/store'
 import { iconMap } from './icons'
 import { appWindow } from '@tauri-apps/api/window'
+import { invoke } from "@tauri-apps/api/tauri"
 
 export const projectPath = writable('')
 export const editorOpenPath = writable('')
@@ -81,4 +82,24 @@ export function closeProject() {
     projectPath.set('')
     setEditorOpenPath('')
     appWindow.setTitle('Win')
+}
+
+export async function getFileType(filePath: string): Promise<string> {
+    return invoke("get_file_type", { filePath })
+}
+
+export async function getFileContent(filePath: string): Promise<string> {
+    return invoke("get_file_content", { filePath })
+}
+
+export async function getFileBase64(filePath: string): Promise<string> {
+    return invoke("get_file_base64", { filePath })
+}
+
+export async function saveFileContent(filePath: string, content: string): Promise<void> {
+    return invoke("save_file_content", { filePath, content })
+}
+
+export async function getFilesInFolder(folderPath: string) {
+    return await invoke("get_files_in_folder", { folderPath: folderPath })
 }
