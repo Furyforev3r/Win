@@ -14,6 +14,10 @@
             event.preventDefault()
             showPalette = !showPalette
         }
+        
+        if (showPalette && event.key == 'Escape') {
+            showPalette = false
+        }
     }
     
     onMount(() => {
