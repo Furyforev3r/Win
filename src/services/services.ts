@@ -71,7 +71,7 @@ export function getIcon(file: File): string {
     if (file.is_dir) {
         return iconMap[`folder-${file.name}`] ?? iconMap['folder']
     } else {
-        const fileExtension = file.name.split('.').pop();
+        const fileExtension = file.name.split('.').pop()
         return fileExtension ? iconMap[`.${fileExtension}`] ?? iconMap['.txt'] : iconMap['.txt']
     }
 }
@@ -79,6 +79,6 @@ export function getIcon(file: File): string {
 export function closeProject() {
     editorsOpen.set([])
     projectPath.set('')
-    appWindow.setTitle('Win')
     setEditorOpenPath('')
+    appWindow.setTitle('Win')
 }
