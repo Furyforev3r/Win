@@ -6,7 +6,7 @@
 </script>
 
 <div class="container">
-    <Explorer projectPath={projectPath} />
+    <Explorer projectPath={$projectPath} />
     <div class:codeMargin={$editorOpenPath}>
         <Tablist />
         {#if $editorOpenPath}

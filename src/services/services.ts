@@ -2,7 +2,7 @@ import { writable, get } from 'svelte/store'
 import { iconMap } from './icons'
 import { appWindow } from '@tauri-apps/api/window'
 
-export const projectPath = ''
+export const projectPath = writable('')
 export const editorOpenPath = writable('')
 export const editorsOpen = writable<Array<{ name: string, filePath: string }>>([])
 
@@ -74,4 +74,13 @@ export function getIcon(file: File): string {
         const fileExtension = file.name.split('.').pop();
         return fileExtension ? iconMap[`.${fileExtension}`] ?? iconMap['.txt'] : iconMap['.txt']
     }
+}
+
+export function closeProject() {
+    editorsOpen.set([])
+    projectPath.set('')
+    appWindow.setTitle('Win')
+    setEditorOpenPath('')
+
+    console.log("Project closed")
 }
