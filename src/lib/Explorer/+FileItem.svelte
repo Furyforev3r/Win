@@ -17,14 +17,18 @@
     }
     
     $: iconPath = getIcon(file)
+
+    function getTruncatedFileName(name: string): string {
+        return name.length > 25 ? name.slice(0, 22) + "..." : name
+    }
 </script>
 
 <div class="fileItem">
-    <button class="fileItemContent" on:click={file.is_dir ? () => { toggleChildren() ; toggleProject() } : () => setEditorOpenPath(file.path)}>
+    <button class="fileItemContent" class:file={!file.is_dir} on:click={file.is_dir ? () => { toggleChildren() ; toggleProject() } : () => setEditorOpenPath(file.path)}>
         <div class="fileIcons">
             {#if file.is_dir}
                 <div class="projectArrow" class:projectClosed={!projectOpen}>
-                    <Icon icon="ri:arrow-down-s-line" />
+                    <Icon icon="ri:arrow-down-s-line" width='15px'/>
                 </div>
             {/if}
     
@@ -32,7 +36,7 @@
         </div>
 
         <p>
-            {file.name}
+            {getTruncatedFileName(file.name)}
         </p>
     </button>
     {#if showChildren && file.is_dir}
@@ -52,7 +56,6 @@
 
     .fileItemContent {
         cursor: pointer;
-        width: 100%;
         margin: 0.3rem;
         display: flex;
         flex-direction: flex;
@@ -64,7 +67,12 @@
     }
 
     .fileItemContent p {
+        font-size: 13px;
         color: rgba(187, 187, 187, 0.6);
+    }
+
+    .file {
+        padding-inline: 15px;
     }
 
     .fileIcons {

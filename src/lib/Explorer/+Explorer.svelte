@@ -54,12 +54,14 @@
                     <div class="projectArrow" class:projectClosed={!projectOpen}>
                         <Icon icon="ri:arrow-down-s-line" />
                     </div>
-                    <p>{$projectPath}</p>
+                    <div class="titleContent">
+                        <p>{$projectPath}</p>
+                    </div>
                 </div>
                 {#if projectButtons}
                     <div class="projectButtons">
                         <button class="titleButton" on:click={close}>
-                            <Icon icon="ri:close-fill" />
+                            <Icon icon="ri:close-fill" width='13px'/>
                         </button>
                     </div>
                 {/if}
@@ -132,6 +134,29 @@
         text-transform: uppercase;
     }
 
+    .titleContent {
+        max-width: 200px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+    }
+
+    .titleContent p {
+        font-size: 13px;
+    }
+
+    .projectTitle:hover .titleContent {
+        overflow: auto;
+    }
+
+    .titleContent::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    .titleContent::-webkit-scrollbar-thumb {
+        background-color: var(--tab-inactiveForeground, rgba(0, 0, 0, 0.5));
+    }
+
     .projectArrow {
         display: grid;
         place-items: center;
@@ -169,10 +194,17 @@
     }
 
     .filesList {
-        height: 100%;
+        overflow-y: hidden;
+        overflow-x: hidden;
         margin-top: 0.3rem;
         display: flex;
         flex-direction: column;
+        max-height: calc(100dvh - 7.3rem); 
+    }
+
+    .filesList:hover {
+        overflow-y: auto;
+        overflow-x: auto;
     }
 
     .filesList::-webkit-scrollbar {
