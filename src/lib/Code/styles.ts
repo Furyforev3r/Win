@@ -60,10 +60,37 @@ let minStyles = {
         width: "10px",
         height: "10px"
     },
-
     ".cm-tooltip-autocomplete > ul::-webkit-scrollbar-thumb": {
         backgroundColor: "var(--tab-inactiveForeground)",
-    }
+    },
+    ".cm-panels": {
+        border: "none",
+        borderRadius: "3px",
+        padding: "0.8rem",
+        margin: "1rem",
+        backgroundColor: "var(--activityBar-background)",
+    },
+    ".cm-panels br": {
+        display: "none",
+    },
+    ".cm-textfield": {
+        padding: "0.3rem",
+        border: "none",
+        borderRadius: "3px",
+        background: "var(--statusBarItem-prominentBackground)",
+    },
+    ".cm-button": {
+        cursor: "pointer",
+        padding: "0.3rem",
+        border: "none",
+        borderRadius: "3px",
+        background: "var(--statusBarItem-prominentBackground)",
+    },
+    ".cm-panel label": {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+    },
 }
 
 export default minStyles
