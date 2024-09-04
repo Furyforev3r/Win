@@ -34,8 +34,7 @@
     
             <img class="fileIcon" src={iconPath} alt={file.name} width="15px" >
         </div>
-
-        <p>
+        <p class:defaultFile={!file.name.startsWith(".") || !file.is_dir} class:hiddenFile={file.name.startsWith(".") && file.is_dir}>
             {getTruncatedFileName(file.name)}
         </p>
     </button>
@@ -68,6 +67,13 @@
 
     .fileItemContent p {
         font-size: 13px;
+    }
+    
+    .hiddenFile {
+        color: rgba(107, 107, 107, 0.6);
+    }
+
+    .defaultFile {
         color: rgba(187, 187, 187, 0.6);
     }
 

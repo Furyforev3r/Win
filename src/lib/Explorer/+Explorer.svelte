@@ -199,7 +199,7 @@
         margin-top: 0.3rem;
         display: flex;
         flex-direction: column;
-        max-height: calc(100dvh - 7.3rem); 
+        max-height: calc(100dvh - 5rem); 
     }
 
     .filesList:hover {
