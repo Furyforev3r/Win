@@ -1,6 +1,6 @@
 let minStyles = {
     "&": {
-        marginBottom: "10%",
+        minWidth: "100%",
         fontFamily: 'JetBrains Mono, monospace',
     },
     ".cm-scroller": {
@@ -9,6 +9,10 @@ let minStyles = {
     },
     ".cm-scroller::-webkit-scrollbar": {
         height: "0",
+    },
+    ".cm-content": {
+        width: "102%",
+        paddingBottom: "10%",
     },
     ".cm-content, .cm-gutters": {
         fontSize: "18px",

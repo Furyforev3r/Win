@@ -88,7 +88,7 @@
     .editor {
         width: 100%;
         height: 100dvh;
-        overflow: auto;
+        overflow-y: hidden;
     }
 
     .imagePreviewContainer {
