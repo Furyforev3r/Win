@@ -101,7 +101,7 @@ body {
     flex-direction: column;
     width: 100dvw;
     box-sizing: border-box;
-    overflow-x: hidden;
+    overflow: hidden;
     background: var(--editor-background);
     font-family: "JetBrains Mono", "Gotham SSm A", "Gotham SSm B", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -119,4 +119,13 @@ h1 {
   
 p {
     font-size: 14px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--tab-inactiveForeground);
 }

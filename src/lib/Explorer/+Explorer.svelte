@@ -138,15 +138,15 @@
         max-width: 200px;
         display: grid;
         place-items: center;
-        overflow: hidden;
+        overflow: auto;
     }
 
     .titleContent p {
         font-size: 13px;
     }
 
-    .projectTitle:hover .titleContent {
-        overflow: auto;
+    .projectTitle:hover .titleContent::-webkit-scrollbar-thumb {
+        background-color: var(--tab-inactiveForeground);
     }
 
     .titleContent::-webkit-scrollbar {
@@ -154,7 +154,7 @@
     }
 
     .titleContent::-webkit-scrollbar-thumb {
-        background-color: var(--tab-inactiveForeground, rgba(0, 0, 0, 0.5));
+        background: none;
     }
 
     .projectArrow {
@@ -194,17 +194,14 @@
     }
 
     .filesList {
-        overflow-y: hidden;
-        overflow-x: hidden;
-        margin-top: 0.3rem;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         max-height: calc(100dvh - 5rem); 
     }
 
     .filesList:hover {
-        overflow-y: auto;
-        overflow-x: auto;
+        overflow: auto;
     }
 
     .filesList::-webkit-scrollbar {

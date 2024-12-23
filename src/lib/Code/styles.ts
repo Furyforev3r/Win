@@ -1,13 +1,17 @@
 let minStyles = {
     "&": {
-        width: "calc(100dvw - 256px)",
+        marginBottom: "10%",
         fontFamily: 'JetBrains Mono, monospace',
     },
     ".cm-scroller": {
-        overflow: 'hidden',
+        height: "calc(100dvh - 3rem)",
+        overflow: "auto",
+    },
+    ".cm-scroller::-webkit-scrollbar": {
+        height: "0",
     },
     ".cm-content, .cm-gutters": {
-        fontSize: "16px",
+        fontSize: "18px",
         lineHeight: "1.8",
     },
     ".cm-gutters": {
