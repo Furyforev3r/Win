@@ -33,7 +33,6 @@
 <style>
     .tablist {
         background-color: var(--activityBar-background);
-        max-width: calc(100dvw - 256px);
         display: flex;
         flex-direction: row;
         gap: 0.3rem;
@@ -42,10 +41,6 @@
     }
 
     .tablist::-webkit-scrollbar {
-        height: 10px;
-    }
-
-    .tablist::-webkit-scrollbar-thumb {
-        background-color: var(--tab-inactiveForeground);
+        height: 5px;
     }
 </style>
