@@ -44,6 +44,7 @@
                 <button
                     class="paletteItem {selectedIndex === index ? 'selected' : ''}"
                     on:mouseover={() => handleMouseOver(index)}
+                    on:mouseout={() => handleMouseOver(0)}
                 >
                     <p class="itemTitle">{result.title}</p>
                     <p class="shortcuts">
