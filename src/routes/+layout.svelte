@@ -2,5 +2,7 @@
     import './globals.css';
 </script>
   
-<slot />
+<div class="win">
+    <slot />
+</div>
   

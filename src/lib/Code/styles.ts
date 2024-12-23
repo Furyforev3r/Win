@@ -7,7 +7,7 @@ let minStyles = {
         overflow: 'hidden',
     },
     ".cm-content, .cm-gutters": {
-        fontSize: "14px",
+        fontSize: "16px",
         lineHeight: "1.8",
     },
     ".cm-gutters": {

@@ -39,20 +39,20 @@
         <Tablist />
         {#if $editorOpenPath}
             <Code editorPath={$editorOpenPath}/>
-            {:else}
-                <div class="winHome">
-                    <div class="winInfo">
-                        <h1>Win</h1>
-                        <p>Win is a modern and lightweight code editor.</p>
-                    </div>
-                    <div class="shortcutsExample">
-                        <p>Show all comands <span>Ctrl</span> + <span>Shift</span> + <span>O</span></p>
-                        <p>Save current file <span>Ctrl</span> + <span>S</span></p>
-                        <p>Change tabs <span>Ctrl</span> + <span>Tab</span></p>
-                        <p>Close tab <span>Ctrl</span> + <span>W</span></p>
-                    </div>
-                    <p>Add a ⭐ on <a href="https://github.com/Furyforev3r/Win">github!</a></p>
+        {:else}
+            <div class="winHome">
+                <div class="winInfo">
+                    <h1>Win</h1>
+                    <p>Win is a modern and lightweight code editor.</p>
                 </div>
+                <div class="shortcutsExample">
+                    <p>Show all comands <span>Ctrl</span> + <span>Shift</span> + <span>O</span></p>
+                    <p>Save current file <span>Ctrl</span> + <span>S</span></p>
+                    <p>Change tabs <span>Ctrl</span> + <span>Tab</span></p>
+                    <p>Close tab <span>Ctrl</span> + <span>W</span></p>
+                </div>
+                <p>Add a ⭐ on <a href="https://github.com/Furyforev3r/Win">github!</a></p>
+            </div>
         {/if}
     </div>
 </div>

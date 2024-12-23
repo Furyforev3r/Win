@@ -1,18 +1,50 @@
-<script>
+<script lang="ts">
     import { onMount } from "svelte"
     import { searchCommand, searchResults } from "./palette"
 
+    let inputRef: HTMLElement | null = null
+    let selectedIndex = 0
+
     onMount(() => {
         searchCommand('')
+        inputRef?.focus()
     })
+
+    function handleKeydown(event: KeyboardEvent) {
+        if (event.key === "ArrowDown") {
+            event.preventDefault()
+            selectedIndex = (selectedIndex + 1) % $searchResults.length
+        } else if (event.key === "ArrowUp") {
+            event.preventDefault()
+            selectedIndex = (selectedIndex - 1 + $searchResults.length) % $searchResults.length
+        } else if (event.key === "Enter") {
+            event.preventDefault()
+        }
+    }
+
+    function handleMouseOver(index: number) {
+        selectedIndex = index
+    }
 </script>
 
 <div class="paletteContainer">
     <div class="palette">
-        <input value="> " type="text" on:change={() => {}} on:input={(e) => searchCommand(e.currentTarget.value.split('> ').at(-1))}>
+        <input
+            value="> "
+            type="text"
+            bind:this={inputRef}
+            on:change={() => {}}
+            on:input={(e) =>
+                searchCommand(e.currentTarget.value.split("> ").at(-1))
+            }
+            on:keydown={handleKeydown}
+        />
         <div class="paletteItems">
-            {#each $searchResults as result }   
-                <button class="paletteItem">
+            {#each $searchResults as result, index}
+                <button
+                    class="paletteItem {selectedIndex === index ? 'selected' : ''}"
+                    on:mouseover={() => handleMouseOver(index)}
+                >
                     <p class="itemTitle">{result.title}</p>
                     <p class="shortcuts">
                         {#each result.shortcut as shortcut}
@@ -55,6 +87,7 @@
         border: 1px solid var(--editorRuler-foreground);
         padding: 0.3rem;
         font-weight: 500;
+        font-size: 1.2rem;
     }
 
     .paletteItems {
@@ -88,15 +121,7 @@
         padding: 0.5rem;
     }
 
-    .paletteItems:hover .paletteItem:not(:hover):first-child {
-        background: none;
-    }
-
-    .paletteItem:first-child {
-        background: var(--editorRuler-foreground);
-    }
-
-    .paletteItem:hover {
+    .paletteItem.selected {
         background: var(--editorRuler-foreground);
     }
 
